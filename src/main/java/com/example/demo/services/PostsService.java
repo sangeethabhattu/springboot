@@ -1,0 +1,54 @@
+package com.example.demo.services;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.example.demo.entity.Post;
+import com.example.demo.repository.PostRepository;
+
+@Service
+public class PostsService
+{
+	
+	@Autowired
+	private PostRepository repo;
+	
+	public List<Post> getPosts()
+	{
+		List<Post> list = new ArrayList<>();
+		for(Post post : repo.findAll())
+		{
+		list.add(post);	
+		}
+		return list;
+		
+	}
+
+	public Post getPost(int id)
+	{
+		
+		return repo.findById(id).get();
+	}
+
+	public void addPost(Post listElement) 
+	{
+		repo.save(listElement);
+		
+	}
+
+	public void updatePost(Post post)
+	{
+		
+		repo.save(post);
+			
+	}
+
+public int deletePost(int id) {
+		
+		repo.deleteById(id);
+		return id;
+		
+	}
+	
+	
+}
